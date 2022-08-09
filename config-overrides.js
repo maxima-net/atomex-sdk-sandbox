@@ -5,6 +5,10 @@ module.exports = function override(config, env) {
     ...config,
     resolve: {
       ...config.resolve,
+      alias: {
+        ...config.resolve.alias,
+				https: 'agent-base',
+			},
       fallback: {
         ...config.resolve.fallback,
         stream: require.resolve('stream-browserify'),

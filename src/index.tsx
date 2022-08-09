@@ -3,13 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AppContext } from './appContext';
+import { createDefaultTestnetAtomex } from 'atomex-sdk/development';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const atomex = createDefaultTestnetAtomex();
+atomex.start();
+
 root.render(
   <React.StrictMode>
-    <App />
+    <AppContext.Provider value={{ atomex }}>
+      <App />
+    </AppContext.Provider>
   </React.StrictMode>
 );
 
