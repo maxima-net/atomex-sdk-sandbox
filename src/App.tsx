@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
+import { createDefaultTestnetAtomex } from 'atomex-sdk/development';
+import { EthereumConnectButton } from './components/ethereumConnectButton';
 import './App.css';
 
 function App() {
+  const atomex = createDefaultTestnetAtomex();
+  atomex.start();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header">Atomex Sdk Playground</header>
+      <EthereumConnectButton />
     </div>
   );
 }
