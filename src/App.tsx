@@ -1,13 +1,13 @@
-import { EthereumConnectButton } from './components/ethereumConnectButton';
+import { MetamaskConnectButton } from './components/metamaskConnectButton';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">Atomex SKD Playground</header>
-      <EthereumConnectButton />
+  return <>
+    <header className="header">Atomex SKD Playground</header>
+    <div className="container">
+      <MetamaskConnectButton />
     </div>
-  );
+  </>;
 }
 
 export default App;
