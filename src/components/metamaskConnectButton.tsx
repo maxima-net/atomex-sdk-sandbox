@@ -49,6 +49,7 @@ export const MetamaskConnectButton = () => {
   const errorMessage = !isMetamaskAvailable ? 'Metamask is not installed' : undefined;
 
   return <ConnectButton
+    walletName="Metamask"
     accountAddress={selectedAddress}
     authToken={authToken}
     onConnectClick={onConnectClick}
