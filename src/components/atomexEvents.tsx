@@ -59,7 +59,6 @@ export const AtomexEvents = () => {
   }, []);
 
   const text = events.reduce((prevResult, currentValue, index) => `${currentValue}${index !== 0 ? '\n\n' : ''}${prevResult}`, '');
-  console.log(events);
 
   return <div className="atomex-events">
     <span>Events</span>
