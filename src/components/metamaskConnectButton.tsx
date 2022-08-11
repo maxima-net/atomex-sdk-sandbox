@@ -1,4 +1,4 @@
-import { AuthToken, AuthTokenSource, Web3EthereumSigner } from "atomex-sdk/development";
+import { AuthToken, AuthTokenSource, Web3BlockchainWallet } from "atomex-sdk/development";
 import { useContext, useEffect, useState } from "react";
 import Web3 from "web3";
 import { AppContext } from "../appContext";
@@ -37,8 +37,8 @@ export const MetamaskConnectButton = () => {
     if (!selectedAddress)
       return
 
-    if (!(await atomex.signers.findSigner(selectedAddress, 'ethereum')))
-      Web3EthereumSigner.bind(atomex, web3.currentProvider);
+    if (!(await atomex.wallets.getWallet(selectedAddress, 'ethereum')))
+      Web3BlockchainWallet.bind(atomex, web3.currentProvider);
 
     const authToken = await atomex.authorization.authorize({ address: selectedAddress });
 

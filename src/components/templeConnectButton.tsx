@@ -1,5 +1,5 @@
 import { TempleDAppPermission, TempleWallet } from "@temple-wallet/dapp";
-import { AuthToken, AuthTokenSource, WalletTezosSigner, Web3EthereumSigner } from "atomex-sdk/development";
+import { AuthToken, AuthTokenSource, TaquitoBlockchainWallet } from "atomex-sdk/development";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../appContext";
 import { ConnectButton } from "./connectButton";
@@ -40,8 +40,8 @@ export const TempleConnectButton = () => {
     if (!selectedAddress)
       return
 
-    if (!(await atomex.signers.findSigner(selectedAddress)))
-      WalletTezosSigner.bind(atomex, temple);
+    if (!(await atomex.wallets.getWallet(selectedAddress)))
+      TaquitoBlockchainWallet.bind(atomex, temple);
 
     const authToken = await atomex.authorization.authorize({ address: selectedAddress });
 
