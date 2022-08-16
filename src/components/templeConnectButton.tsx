@@ -7,6 +7,7 @@ import { ConnectButton } from "./connectButton";
 export const TempleConnectButton = () => {
   const { atomex } = useContext(AppContext);
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isTempleAvailable, setIsTempleAvailable] = useState<boolean | undefined>();
   const [permission, setPermission] = useState<TempleDAppPermission | undefined>();
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
@@ -29,6 +30,8 @@ export const TempleConnectButton = () => {
             setAuthToken(authToken);
         }
       }
+
+      setIsLoading(false)
     };
 
     checkConnectionState();
@@ -53,6 +56,7 @@ export const TempleConnectButton = () => {
 
   return <ConnectButton
     walletName="Temple"
+    loading={isLoading}
     accountAddress={selectedAddress}
     authToken={authToken}
     onConnectClick={onConnectClick}

@@ -9,6 +9,7 @@ export const MetamaskConnectButton = () => {
   const web3 = new Web3(Web3.givenProvider);
   const isMetamaskAvailable = web3.eth.givenProvider;
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
   const [authToken, setAuthToken] = useState<AuthToken | undefined>();
 
@@ -22,6 +23,8 @@ export const MetamaskConnectButton = () => {
         if (authToken)
           setAuthToken(authToken);
       }
+
+      setIsLoading(false);
     };
 
     checkConnectionState();
@@ -50,6 +53,7 @@ export const MetamaskConnectButton = () => {
 
   return <ConnectButton
     walletName="Metamask"
+    loading={isLoading}
     accountAddress={selectedAddress}
     authToken={authToken}
     onConnectClick={onConnectClick}

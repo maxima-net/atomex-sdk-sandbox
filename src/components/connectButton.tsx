@@ -3,16 +3,21 @@ import './connectButton.scss';
 
 interface ConnectButtonProps {
   walletName: string;
+  loading: boolean;
   accountAddress?: string;
   authToken?: AuthToken;
   onConnectClick: () => void;
   errorMessage?: string;
 }
 
-export const ConnectButton = ({ accountAddress, authToken, errorMessage, walletName, onConnectClick }: ConnectButtonProps) => {
+export const ConnectButton = ({ loading, accountAddress, authToken, errorMessage, walletName, onConnectClick }: ConnectButtonProps) => {
   const connectionState = accountAddress ? `Connected to ${accountAddress}` : 'Not connected';
   const authorizationState = authToken?.userId ? `Authorized user: ${authToken?.userId}` : 'Not authorized';
-  const text = errorMessage ? errorMessage : `${connectionState}; ${authorizationState}`;
+  const text = loading
+    ? 'Loading...'
+    : errorMessage
+      ? errorMessage
+      : `${connectionState}; ${authorizationState}`;
   const isConnectButtonDisabled = !!errorMessage || (!!accountAddress && !!authToken?.userId);
 
   return <div className="connect-button">

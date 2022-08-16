@@ -7,7 +7,7 @@ import './atomexEvents.scss';
 const getLogText = (event: string, data: any) => {
   const now = new Date();
   const timeString = `${formatTimeValue(now.getHours())}:${formatTimeValue(now.getMinutes())}:${formatTimeValue(now.getSeconds())}.${now.getMilliseconds()}`;
-  return `${timeString}:\n${event}:\n${JSON.stringify(data)}`;
+  return `${timeString}\n${event}:\n${JSON.stringify(data)}`;
 }
 
 const formatTimeValue = (value: number) => {
