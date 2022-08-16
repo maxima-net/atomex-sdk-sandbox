@@ -32,7 +32,7 @@ export const TempleConnectButton = () => {
     };
 
     checkConnectionState();
-  }, []);
+  }, [atomex.authorization]);
 
   const onConnectClick = async () => {
     await (temple as any).connect('ghostnet');
