@@ -1,8 +1,13 @@
 import { TempleDAppPermission, TempleWallet } from "@temple-wallet/dapp";
-import { AuthToken, AuthTokenSource, TaquitoBlockchainWallet } from "atomex-sdk/development";
+import { Atomex, AuthToken, AuthTokenSource, TaquitoBlockchainWallet } from "atomex-sdk/development";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../appContext";
+import { getTokenBalance } from "../utils/balance";
 import { ConnectButton } from "./connectButton";
+
+const checkBalance = async (atomex: Atomex, accountAddress: string) => {
+  console.log('XTZ Balance: ', (await getTokenBalance(atomex, 'XTZ', accountAddress))?.toString());
+}
 
 export const TempleConnectButton = () => {
   const { atomex } = useContext(AppContext);
@@ -28,6 +33,8 @@ export const TempleConnectButton = () => {
           const authToken = await atomex.authorization.authorize({ address: permission.pkh, authTokenSource: AuthTokenSource.Local });
           if (authToken)
             setAuthToken(authToken);
+
+          checkBalance(atomex, permission.pkh);
         }
       }
 
@@ -35,7 +42,7 @@ export const TempleConnectButton = () => {
     };
 
     checkConnectionState();
-  }, [atomex.authorization]);
+  }, [atomex, atomex.authorization]);
 
   const onConnectClick = async () => {
     await (temple as any).connect('ghostnet');

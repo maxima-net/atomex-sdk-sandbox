@@ -1,8 +1,13 @@
-import { AuthToken, AuthTokenSource, Web3BlockchainWallet } from "atomex-sdk/development";
+import { Atomex, AuthToken, AuthTokenSource, Web3BlockchainWallet, } from "atomex-sdk/development";
 import { useContext, useEffect, useState } from "react";
 import Web3 from "web3";
 import { AppContext } from "../appContext";
+import { getTokenBalance } from "../utils/balance";
 import { ConnectButton } from "./connectButton";
+
+const checkBalance = async (atomex: Atomex, accountAddress: string) => {
+  console.log('ETH Balance: ', (await getTokenBalance(atomex, 'ETH', accountAddress))?.toString());
+}
 
 export const MetamaskConnectButton = () => {
   const { atomex } = useContext(AppContext);
@@ -22,6 +27,8 @@ export const MetamaskConnectButton = () => {
         const authToken = await atomex.authorization.authorize({ address: accountAddress, authTokenSource: AuthTokenSource.Local });
         if (authToken)
           setAuthToken(authToken);
+
+        checkBalance(atomex, accountAddress);
       }
 
       setIsLoading(false);

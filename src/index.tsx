@@ -13,9 +13,11 @@ const root = ReactDOM.createRoot(
 const atomex = createDefaultTestnetAtomex();
 atomex.start();
 
+const appContextValue = { atomex };
+
 root.render(
   <React.StrictMode>
-    <AppContext.Provider value={{ atomex }}>
+    <AppContext.Provider value={appContextValue}>
       <App />
     </AppContext.Provider>
   </React.StrictMode>
