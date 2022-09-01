@@ -1,6 +1,7 @@
 import { MetamaskConnectButton } from './components/metamaskConnectButton';
 import { AtomexEvents } from './components/atomexEvents';
 import { TempleConnectButton } from './components/templeConnectButton';
+import { Exchange } from './components/exchange';
 import './App.css';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
     <div className="container">
       <MetamaskConnectButton />
       <TempleConnectButton />
+      <Exchange />
       <AtomexEvents />
     </div>
   </>;
