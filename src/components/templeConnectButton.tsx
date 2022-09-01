@@ -30,6 +30,9 @@ export const TempleConnectButton = () => {
         setSelectedAddress(permission?.pkh);
 
         if (permission) {
+          await (temple as any).connect('ghostnet');
+          TaquitoBlockchainWallet.bind(atomex, temple);
+
           const authToken = await atomex.authorization.authorize({ address: permission.pkh, authTokenSource: AuthTokenSource.Local });
           if (authToken)
             setAuthToken(authToken);
@@ -50,8 +53,7 @@ export const TempleConnectButton = () => {
     if (!selectedAddress)
       return
 
-    if (!(await atomex.wallets.getWallet(selectedAddress)))
-      TaquitoBlockchainWallet.bind(atomex, temple);
+    TaquitoBlockchainWallet.bind(atomex, temple);
 
     const authToken = await atomex.authorization.authorize({ address: selectedAddress });
 

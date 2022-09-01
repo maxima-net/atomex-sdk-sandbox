@@ -24,6 +24,8 @@ export const MetamaskConnectButton = () => {
       setSelectedAddress(accountAddress);
 
       if (accountAddress) {
+        Web3BlockchainWallet.bind(atomex, web3.currentProvider);
+
         const authToken = await atomex.authorization.authorize({ address: accountAddress, authTokenSource: AuthTokenSource.Local });
         if (authToken)
           setAuthToken(authToken);
@@ -47,8 +49,7 @@ export const MetamaskConnectButton = () => {
     if (!selectedAddress)
       return
 
-    if (!(await atomex.wallets.getWallet(selectedAddress, 'ethereum')))
-      Web3BlockchainWallet.bind(atomex, web3.currentProvider);
+    Web3BlockchainWallet.bind(atomex, web3.currentProvider);
 
     const authToken = await atomex.authorization.authorize({ address: selectedAddress });
 
